@@ -1,13 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+
+import { Provider } from 'react-redux';
+import { RouterProvider } from 'react-router-dom';
+import router from './router';
 import reportWebVitals from './reportWebVitals';
+import { configureStore } from '@reduxjs/toolkit';
+import { UserReducer,authReducer,dataReducer,loginReducer } from './UserReducer';
+
+const store=configureStore({
+  reducer:{
+
+    users:UserReducer,
+    auth:authReducer,
+    data:dataReducer,
+    Logins:loginReducer
+
+  }
+
+})
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+   <RouterProvider router= {router} />
+   </Provider>
   </React.StrictMode>
 );
 
